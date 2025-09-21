@@ -286,19 +286,106 @@
       </div>
     </div>
   </footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cool Chatbot Button</title>
+  <style>
+    /* Floating animation */
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
 
-  <!-- CHATBOT TRIGGER BUTTON -->
-  <button id="chatTrigger"
-          class="ripple group fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-500 text-white shadow-glow flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
-          aria-label="Open chatbot">
-    <span class="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
-    <svg viewBox="0 0 24 24" class="w-7 h-7 relative">
-      <path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h2.5l2.5 3 2.5-3H18a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor"/>
-      <circle cx="9.5" cy="9" r="1.2" fill="#A7F3D0"/>
-      <circle cx="14.5" cy="9" r="1.2" fill="#A7F3D0"/>
+    /* Glow pulse */
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 10px rgba(16,185,129,0.4), 0 0 20px rgba(16,185,129,0.2); }
+      50% { box-shadow: 0 0 40px rgba(16,185,129,0.9), 0 0 80px rgba(16,185,129,0.6); }
+      100% { box-shadow: 0 0 10px rgba(16,185,129,0.4), 0 0 20px rgba(16,185,129,0.2); }
+    }
+
+    /* Ripple effect */
+    .chatbot-btn::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      background: rgba(16,185,129,0.4);
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+    .chatbot-btn:active::after {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+
+    /* Shine sweep */
+    .chatbot-btn::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(25deg) translateX(-100%);
+      transition: transform 0.8s ease;
+    }
+    .chatbot-btn:hover::before {
+      transform: rotate(25deg) translateX(100%);
+    }
+
+    /* Button base */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #34d399, #059669);
+      border: 2px solid rgba(16,185,129,0.6);
+      cursor: pointer;
+      overflow: hidden;
+      animation: glowPulse 3s infinite ease-in-out, floaty 6s infinite ease-in-out;
+      transition: transform 0.3s ease;
+      z-index: 9999;
+    }
+
+    .chatbot-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .chatbot-btn svg {
+      position: relative;
+      z-index: 10;
+      width: 34px;
+      height: 34px;
+      fill: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Chat Button -->
+  <button id="chatTrigger" class="chatbot-btn" aria-label="Open chatbot">
+    <!-- New Icon: Sparkly Message -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M4 4h16v12H5.17L4 17.17V4zm0-2a2 2 0 0 0-2 2v20l4-4h14a2 2 0 0 0 2-2V4a2
+               2 0 0 0-2-2H4zm7 7h2v2h-2V9zm-4 0h2v2H7V9zm8 0h2v2h-2V9z"/>
     </svg>
-    <span class="sr-only">Open chatbot</span>
   </button>
+
+</body>
+</html>
 
   <!-- CHATBOT MODAL -->
   <div id="chatOverlay" class="fixed inset-0 z-50 hidden">
@@ -425,7 +512,7 @@
      class="flex-1 overflow-y-auto thin-scroll p-4 sm:p-6 space-y-4 relative bg-transparent">
                   <!-- Background image layer -->
   <!-- Background Video Layer -->
- 
+
 
               <!-- Initial bot message -->
               <div class="flex items-start gap-3">
@@ -438,23 +525,43 @@
               </div>
             </div>
 
-            <!-- Composer -->
-            <div class="border-t border-slate-700/60 p-4 sm:p-5 bg-slate-900/70" style="border-radius: 20px;" >
+<!-- Composer -->
+<!-- Composer -->
+<div class="border-t border-slate-700/60 p-4 sm:p-5 bg-slate-900/70" style="border-radius: 20px;" >
 
-              <div class="flex items-end gap-3">
-                <div class="hidden sm:flex flex-col items-center justify-center">
-                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-emerald-400 to-brand-500 shadow-glow animate-floaty"></div>
-                </div>
-                <div class="relative flex-1">
-                  <input id="chatInput"
-                         class="w-full px-4 py-3 rounded-2xl bg-slate-800/80 border border-slate-700/70 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 shadow-inner"
-                         placeholder="Type your message..." />
-                  <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">Press Enter</div>
-                </div>
-                <button id="sendBtn"
-                        class="h-12 px-5 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 text-white font-medium shadow-glow hover:to-emerald-400 active:scale-[.98] transition">
-                  Send
-                </button>
+  <div class="flex items-end gap-3">
+
+    <!-- Chat Input -->
+    <div class="relative flex-1">
+      <input id="chatInput"
+             class="w-full px-4 py-3 rounded-2xl bg-slate-800/80 border border-slate-700/70 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 shadow-inner animate-glow"
+             placeholder="Type your message..." />
+      <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">Press Enter</div>
+    </div>
+
+    <!-- Send Button -->
+    <button id="sendBtn"
+            class="h-12 px-5 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 text-white font-medium shadow-glow hover:to-emerald-400 active:scale-[.98] transition">
+      Send
+    </button>
+  </div>
+</div>
+
+<style>
+/* Glow animation for input bar */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px #10b981, 0 0 10px #10b981; }
+  50% { box-shadow: 0 0 20px #10b981, 0 0 30px #10b981; }
+  100% { box-shadow: 0 0 5px #10b981, 0 0 10px #10b981; }
+}
+.animate-glow {
+  animation: glow 2s infinite ease-in-out;
+}
+</style>
+
+
+
+
               </div>
             </div>
           </main>
@@ -539,7 +646,7 @@
       showChatView();
       signInBtn.disabled = false;
       signInBtn.textContent = "Sign in";
-      botReply("You're signed in! How can I help today?");
+      // botReply("You're signed in! How can I help today?");
     }
 
     // Chat utilities
@@ -622,11 +729,24 @@
     backdrop.addEventListener('click', hideOverlay);
     minimizeBtn.addEventListener('click', hideOverlay);
 
-    signInBtn.addEventListener('click', fakeSignInFlow);
-    guestBtn.addEventListener('click', () => {
-      showChatView();
-      botReply("You're in as a guest. How can I help today?");
-    });
+    // signInBtn.addEventListener('click', fakeSignInFlow);
+    // guestBtn.addEventListener('click', () => {
+    //   showChatView();
+    //   botReply("You're in as a guest. How can I help today?");
+    //   let guestMessageShown = false;
+
+guestBtn.addEventListener('click', () => {
+  // Always show the chat view
+  showChatView();
+
+  // Only show the bot reply once
+  if (!guestMessageShown) {
+    botReply("You're in as a guest. How can I help today?");
+    guestMessageShown = true;
+  }
+});
+
+
 
     sendBtn.addEventListener('click', () => handleUserSend(chatInput.value) || (chatInput.value = ''));
     chatInput.addEventListener('keydown', (e) => {
