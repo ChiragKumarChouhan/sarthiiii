@@ -411,7 +411,7 @@
 
         </div>
         <div class="flex items-center gap-2">
-          <button id="minimizeBtn" class="hidden sm:inline-flex px-3 py-2 text-xs rounded-lg bg-slate-800 border border-slate-700 hover:bg-slate-700/70 transition">Minimize</button>
+          <button id="minimizeBtn" class=""></button>
           <button id="closeBtn" class="p-2 rounded-lg hover:bg-slate-700/60 transition" aria-label="Close">
             <svg viewBox="0 0 24 24" class="w-5 h-5 text-slate-300">
               <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -709,17 +709,20 @@
       // Simple mock routing for demo
       const t = text.toLowerCase();
       if (t.includes('program') || t.includes('courses')) {
-        botReply("We offer 50+ programs across technology, business, arts, and sciences. What field are you interested in?");
+        botReply("We offer 50+ programs across technology, business, and sciences. What field are you interested in?");
       } else if (t.includes('scholar') || t.includes('aid') || t.includes('fee')) {
-        botReply("Scholarships are merit- and need-based. Applications open with admissions—want guidance on eligibility?");
+        botReply("You can apply for scholarships at ABES by checking eligibility and submitting the application via their official website: abes.ac.in");
       } else if (t.includes('housing') || t.includes('hostel') || t.includes('accommodation')) {
-        botReply("Yes, on-campus housing is available for first-year students. Would you like room types or fee details?");
+        botReply("Yes, on-campus housing is available for both boys and girls every year. Would you like information on room types or fee details?");
       } else if (t.includes('admission') || t.includes('apply')) {
-        botReply("You can apply online. I can walk you through deadlines, documents, and the application fee.");
-      } else if (t.includes('contact') || t.includes('email') || t.includes('phone')) {
-        botReply("Admissions: admissions@evergreencollege.edu, +91-98765-43210. Hours: Mon–Fri, 9:00–17:00 IST.");
-      } else {
-        botReply("Great question! I can help with programs, fees, scholarships, housing, and more. What would you like to explore?");
+        botReply("You can apply directly or through UPTAC counseling,and I can guide you on deadlines, documents, and fees");
+       } else if (t.includes('contact') || t.includes('email') || t.includes('phone')) {
+  botReply("Admissions: info@abes.ac.in | Phone: +91-120-713-5112");
+}
+
+       else {
+        botReply("I’m sorry, I don’t have an answer to that right now. You can contact ABES directly for assistance: <a href='https://www.abes.ac.in' target='_blank'>ABES Official Website</a>.");
+
       }
     }
 
